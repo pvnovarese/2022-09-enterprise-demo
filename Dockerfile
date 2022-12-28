@@ -3,8 +3,8 @@ FROM xmrig/xmrig:latest AS xmrig
 FROM docker.io/redhat/ubi8-minimal:latest
 
 LABEL maintainer="pvn@novarese.net"
-LABEL name="2022-08-enterprise-demo"
-LABEL org.opencontainers.image.title="2022-08-enterprise-demo"
+LABEL name="2022-09-enterprise-demo"
+LABEL org.opencontainers.image.title="2022-09-enterprise-demo"
 LABEL org.opencontainers.image.description="Simple image to test various policy rules with Anchore Enterprise."
 
 HEALTHCHECK --timeout=10s CMD /bin/true || exit 1
@@ -22,7 +22,7 @@ RUN set -ex && \
     curl -sSfL  https://anchorectl-releases.anchore.io/anchorectl/install.sh  | sh -s -- -b $HOME/.local/bin && \
     adduser -d /xmrig mining && \
     pip3 install --index-url https://pypi.org/simple --no-cache-dir aiohttp==3.7.3 pytest urllib3 botocore six numpy && \
-    gem install bundler lockbox:0.6.8 ftpd:0.2.1 && \
+    gem install lockbox:0.6.8 ftpd:0.2.1 && \
     npm install -g --cache /tmp/empty-cache debug chalk commander xmldom@0.4.0 && \
     npm cache clean --force && \
     microdnf -y clean all && \
