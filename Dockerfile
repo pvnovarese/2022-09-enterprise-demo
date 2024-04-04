@@ -19,7 +19,11 @@ RUN set -ex && \
     echo "aws_access_key_id=01234567890123456789" > /aws_access && \
     echo "-----BEGIN OPENSSH PRIVATE KEY-----" > /ssh_key && \
     microdnf -y install ruby python3-devel python3 python3-pip nodejs shadow-utils tar gzip && \
-    curl -sSfL  https://anchorectl-releases.anchore.io/anchorectl/install.sh  | sh -s -- -b $HOME/.local/bin && \
+    ###
+    ### when you install anchorectl you should use v4.9.0 for any Anchore Enterprise release before 5.0.0, 
+    ### if you're on 5.0.0 or later then you should try to match anchorectl to your Anchore Enterprise version.
+    curl -sSfL  https://anchorectl-releases.anchore.io/anchorectl/install.sh  | sh -s -- -b $HOME/.local/bin v4.9.0 && \
+    ###
     adduser -d /xmrig mining && \
     pip3 install --index-url https://pypi.org/simple --no-cache-dir aiohttp==3.7.3 pytest urllib3 botocore six numpy && \
     gem install lockbox:0.6.8 ftpd:0.2.1 && \
